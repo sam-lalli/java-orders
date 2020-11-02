@@ -2,6 +2,8 @@ package com.lambdaschool.javaorders.models;
 
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "agents")
@@ -17,6 +19,13 @@ public class Agents {
     private double commission;
     private String phone;
     private String country;
+
+    //one agent to many customers
+    @OneToMany(mappedBy = "agentcode",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
+    List<Customers> customers = new ArrayList<>();
+
 
     public Agents() {
         //required by JPA
